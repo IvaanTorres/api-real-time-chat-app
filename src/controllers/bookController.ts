@@ -12,12 +12,13 @@ class BookController {
    * @return Template view (render)
    */
   public async index(req: Request, res: Response): Promise<void> {
-    try {
+    res.status(200).json({error: "no"})
+    /* try {
       const books: Book[] = await BookModel.find().lean() //? .lean() makes the arr of JSON Obj and not of Mongoose Obj
       res.status(200).json(books)
     } catch (error) {
       res.status(500).json(error)
-    }
+    } */
   }
 
   /**

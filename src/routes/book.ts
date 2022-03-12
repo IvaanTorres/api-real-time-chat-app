@@ -2,17 +2,17 @@ import { Router } from 'express'
 const router = Router()
 
 //! MIDDLEARES
-import { auth, role } from '../middlewares/auth'
+/* import { auth, role } from '../middlewares/auth' */
 
 //! CONTROLLERS
 import bookController from '../controllers/bookController'
 
 router.get('/', bookController.index)
-router.post('/', auth(), role('0'), bookController.store)
-router.get('/add', auth(), role('0'), bookController.create)
+router.post('/', bookController.store)
+router.get('/add', bookController.create)
 router.get('/:id', bookController.show) //? .show is down to let .create work
-router.put('/:id', auth(), role('0'), bookController.update)
-router.get('/:id/edit', auth(), role('0'), bookController.edit)
-router.delete('/:id', auth(), role('0'), bookController.destroy)
+router.put('/:id', bookController.update)
+router.get('/:id/edit', bookController.edit)
+router.delete('/:id', bookController.destroy)
 
 export default router

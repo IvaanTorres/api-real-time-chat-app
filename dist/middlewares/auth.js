@@ -1,3 +1,4 @@
+"use strict";
 /* import { Request, Response, NextFunction } from 'express'
 
 export const auth = () => {
@@ -13,4 +14,4 @@ export const role = (role: String) => {
     else res.render('auth/login', { title: 'Login' })
   }
 }
- */
+ */ 

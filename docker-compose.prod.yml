@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    image: 'ivaantorres/api-real-time-chat-app:0.1'
+    ports:
+      - '3000:3000'
+    container_name: app-back
+
+  mongo:
+    image: 'mongo:5.0.6'
+    ports:
+      - '27017:27017'
+    container_name: mongo
+    volumes:
+      - '/c/data/db:/data/db'
+    logging:
+      driver: none
