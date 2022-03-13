@@ -4,9 +4,9 @@ WORKDIR /usr/src/app/
 ENV CHOKIDAR_USEPOLLING=true
 # El "*" es necesario para que la app se muestre en el navegador (sino, funciona pero rechaza la conexion)
 # Así copia el package.json y package-lock.json, el cual es importante
-COPY package*.json .
+COPY package*.json /usr/src/app/
 RUN npm install
-COPY . .
+COPY . /usr/src/app/
 
 # DEVELOP ENVIRONMENT STAGE
 FROM main as dev

@@ -8,7 +8,9 @@ class IndexController {
    * @param res Response
    * @return Template view (render)
    */
-  public index(req: Request, res: Response) {}
+  public index(req: Request, res: Response) {
+    res.status(200).json({index: "Welcome !"})
+  }
 
   /**
    * Display Error.
