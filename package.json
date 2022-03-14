@@ -1,7 +1,7 @@
 {
-  "name": "express-base-template",
+  "name": "api-thunder-link",
   "version": "1.0.0",
-  "description": "NodeJS (Express) + TS",
+  "description": "API Thunder Link APP (Real time chat app)",
   "main": "index.js",
   "scripts": {
     "clear": "rm -fr dist",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IvaanTorres/express-base-template.git"
+    "url": "git+https://github.com/IvaanTorres/api-real-time-chat-app.git"
   },
-  "author": "",
+  "author": "@IvaanTorres",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IvaanTorres/express-base-template/issues"
+    "url": "https://github.com/IvaanTorres/api-real-time-chat-app/issues"
   },
-  "homepage": "https://github.com/IvaanTorres/express-base-template#readme",
+  "homepage": "https://github.com/IvaanTorres/api-real-time-chat-app#readme",
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
