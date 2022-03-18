@@ -14,6 +14,11 @@ services:
       target: prod
     ports:
       - '3000:3000'
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
     volumes:
       - '/usr/src/app/node_modules' # Necesario para el arranque de la app en Docker
       - '.:/usr/src/app'
@@ -25,5 +30,19 @@ services:
       - '27017:27017'
     volumes:
       - '/c/data/db:/data/db'
+    logging:
+      driver: none
+
+  sonarqube:
+    container_name: sonarqube
+    image: 'sonarqube:lts-community'
+    ports:
+      - '9000:9000'
+      - '9002:9002'
+    volumes:
+      - '/c/Users/Iván/Desktop/sonarqube/data:/opt/sonarqube/data'
+      - '/c/Users/Iván/Desktop/sonarqube/conf:/opt/sonarqube/conf'
+      - '/c/Users/Iván/Desktop/sonarqube/logs:/opt/sonarqube/logs'
+      - '/c/Users/Iván/Desktop/sonarqube/extensions:/opt/sonarqube/extensions'
     logging:
       driver: none
