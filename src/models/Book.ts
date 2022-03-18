@@ -31,6 +31,5 @@ const BookSchema = new mongoose.Schema({
   author: AuthorSchema,
 })
 
-//* Using the Schema, we create a MongoDB Collection called 'books' which will follow the requirements
-let BookModel = mongoose.model<Book>('books', BookSchema)
+const BookModel = mongoose.model<Book>('books', BookSchema)
 export { Book, BookSchema, BookModel }

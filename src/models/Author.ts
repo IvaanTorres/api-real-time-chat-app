@@ -12,7 +12,6 @@ interface Author extends mongoose.Document {
   }
 }
 
-//! PREGUNTAR: AL HACER POST, DA ERROR SI LA FECHA ES MAYOR A 2000, PERO SI LUEGO LO ACTUALIZO NO SE QUEJA
 const AuthorSchema = new mongoose.Schema({
   name: {
     type: String,

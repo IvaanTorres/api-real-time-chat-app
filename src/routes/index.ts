@@ -1,8 +1,9 @@
 import { Router } from 'express'
-const router = Router()
 
 //! CONTROLLERS
 import indexController from '../controllers/indexController'
+
+const router = Router()
 
 router.get('/', indexController.index)
 router.get('/error', indexController.error)

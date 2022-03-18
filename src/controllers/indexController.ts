@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Request, Response } from 'express'
 
 class IndexController {
@@ -9,7 +10,7 @@ class IndexController {
    * @return Template view (render)
    */
   public index(req: Request, res: Response) {
-    res.status(200).json({index: "Welcome !"})
+    res.status(200).json({ index: 'Welcome !' })
   }
 
   /**

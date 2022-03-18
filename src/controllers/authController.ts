@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import bcrypt from 'bcrypt'
 import { Request, Response } from 'express'
 
@@ -5,14 +6,6 @@ import { Request, Response } from 'express'
 import { UserModel } from '../models/Auth'
 
 class AuthController {
-  /**
-   * Display the register form.
-   *
-   * @param req Request
-   * @param res Response
-   * @return Template view (render)
-   */
-  public showRegister(req: Request, res: Response) {}
   /**
    * Register.
    *
@@ -24,12 +17,12 @@ class AuthController {
     try {
       const { user, password } = req.body
       const searchedUser = await UserModel.findOne({
-        user: user,
+        user,
       })
       if (searchedUser) {
         const hashPassword = await bcrypt.hash(password, 10)
         const newUser = new UserModel({
-          user: user,
+          user,
           password: hashPassword,
           role: '0',
         })
@@ -42,15 +35,6 @@ class AuthController {
   }
 
   /**
-   * Display the login form.
-   *
-   * @param req Request
-   * @param res Response
-   * @return Template view (render)
-   */
-  public showLogin(req: Request, res: Response) {}
-
-  /**
    * Login.
    *
    * @param req Request
@@ -61,13 +45,13 @@ class AuthController {
     try {
       const { user, password } = req.body
       const userFound = await UserModel.findOne({
-        user: user,
+        user,
       })
       const match = await bcrypt.compare(password, userFound?.password)
       if (userFound != null && match) {
-        //Logged
+        // Logged
       } else {
-        //Error: Didn't find / match
+        // Error: Didn't find / match
       }
     } catch (error) {
       res.status(500).json(error)
@@ -83,7 +67,7 @@ class AuthController {
    */
   public logout(req: Request, res: Response) {
     try {
-      //Logout
+      // Logout
     } catch (error) {
       res.status(500).json(error)
     }

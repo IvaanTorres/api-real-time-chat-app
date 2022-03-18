@@ -12,10 +12,7 @@ if [[ $current_branch =~ master|main ]]; then
     exit 1
 fi
 
-#if [[ $current_branch =~ dev ]]; then
-    #printf "${BLUE}Running ESLint and trying to fix errors...\n${NC}"
-    #npm run lint
-
-    #printf "${BLUE}Running the checks for types on TypeScript...\n${NC}"
-    #npm run typecheck 
-#fi
+if [[ $current_branch =~ dev ]]; then
+    printf "${BLUE}Running ESLint and trying to fix errors...\n${NC}"
+    npm run lint
+fi

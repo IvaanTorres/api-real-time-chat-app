@@ -1,3 +1,5 @@
+/* eslint-disable no-empty-function */
+/* eslint-disable no-unused-vars */
 import { Request, Response } from 'express'
 
 //! MODELS
@@ -12,13 +14,7 @@ class BookController {
    * @return Template view (render)
    */
   public async index(req: Request, res: Response): Promise<void> {
-    res.status(200).json({error: "no"})
-    /* try {
-      const books: Book[] = await BookModel.find().lean() //? .lean() makes the arr of JSON Obj and not of Mongoose Obj
-      res.status(200).json(books)
-    } catch (error) {
-      res.status(500).json(error)
-    } */
+    res.status(200).json({ error: 'no' })
   }
 
   /**
@@ -55,11 +51,13 @@ class BookController {
    */
   public async store(req: Request, res: Response) {
     try {
-      const { title, authorName, editorial, price } = req.body
+      const {
+        title, authorName, editorial, price,
+      } = req.body
       const book = new BookModel({
-        title: title,
-        editorial: editorial,
-        price: price,
+        title,
+        editorial,
+        price,
         author: {
           name: authorName,
         },
@@ -87,21 +85,23 @@ class BookController {
    * @param res Response
    * @return Template view (render)
    */
-  //? In case of wanting to update a subdocument, use promises or $set
+  // ? In case of wanting to update a subdocument, use promises or $set
   public async update(req: Request, res: Response) {
     try {
-      const { title, authorName, editorial, price } = req.body
-      let book = await BookModel.findByIdAndUpdate(
+      const {
+        title, authorName, editorial, price,
+      } = req.body
+      const book = await BookModel.findByIdAndUpdate(
         req.params.id,
         {
           $set: {
-            title: title,
-            editorial: editorial,
-            price: price,
+            title,
+            editorial,
+            price,
             author: { name: authorName },
           },
         },
-        { new: true }
+        { new: true },
       )
       res.status(201).json(book)
     } catch (error) {
