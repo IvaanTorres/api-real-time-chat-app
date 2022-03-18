@@ -1,0 +1,6 @@
+projectKey=api-thunder-link
+serverUrl=http://localhost:9000
+serverVersion=8.9.7.52159
+dashboardUrl=http://localhost:9000/dashboard?id=api-thunder-link
+ceTaskId=AX-eRCdtIcmFTNOawLwx
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX-eRCdtIcmFTNOawLwx
