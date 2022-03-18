@@ -1,6 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
-import path from 'path'
+// import path from 'path'
 
 //! ROUTES
 import bookRoutes from './routes/book'
@@ -14,8 +14,8 @@ app.set('port', process.env.PORT || 3000)
 
 //! MIDDLEWARES
 app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: false })) //Makes readable form data sent from client
-app.use(express.json()) //Transform data to JSON before dealing with it
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 //! ROUTER
 app.use('/', indexRoutes)
