@@ -4,7 +4,7 @@ import { Router } from 'express'
 /* import { auth, role } from '../middlewares/auth' */
 
 //! CONTROLLERS
-import bookController from '../controllers/bookController'
+import bookController from '../controllers/commentController'
 
 const router = Router()
 
