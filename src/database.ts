@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-//! DOTENV CONFIG
 import mongoose from 'mongoose'
-
-require('dotenv').config()
+import {
+  DB_CONNECTION, DB_DATABASE, DB_HOST, DB_PORT,
+} from './config'
 
 mongoose
   .connect(
-    `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`,
+    `${DB_CONNECTION}://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
   )
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log(`An error occured during the MongoDB connection\nERROR: ${err}`))

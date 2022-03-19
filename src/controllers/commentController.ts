@@ -3,9 +3,9 @@
 import { Request, Response } from 'express'
 
 //! MODELS
-import { Book, BookModel } from '../models/Book'
+import { Comment, CommentModel } from '../models/Comment'
 
-class BookController {
+class CommentController {
   /**
    * Display a listing of the resource.
    *
@@ -25,12 +25,7 @@ class BookController {
    * @return Template view (render)
    */
   public async show(req: Request, res: Response) {
-    try {
-      const book = await BookModel.findById(req.params.id).lean()
-      res.status(200).json(book)
-    } catch (error) {
-      res.status(500).json(error)
-    }
+
   }
 
   /**
@@ -50,23 +45,7 @@ class BookController {
    * @return Template view (render)
    */
   public async store(req: Request, res: Response) {
-    try {
-      const {
-        title, authorName, editorial, price,
-      } = req.body
-      const book = new BookModel({
-        title,
-        editorial,
-        price,
-        author: {
-          name: authorName,
-        },
-      })
-      const newBook = await book.save()
-      res.status(201).json(newBook)
-    } catch (error) {
-      res.status(500).json(error)
-    }
+
   }
 
   /**
@@ -87,26 +66,7 @@ class BookController {
    */
   // ? In case of wanting to update a subdocument, use promises or $set
   public async update(req: Request, res: Response) {
-    try {
-      const {
-        title, authorName, editorial, price,
-      } = req.body
-      const book = await BookModel.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: {
-            title,
-            editorial,
-            price,
-            author: { name: authorName },
-          },
-        },
-        { new: true },
-      )
-      res.status(201).json(book)
-    } catch (error) {
-      res.status(500).json(error)
-    }
+
   }
 
   /**
@@ -117,14 +77,9 @@ class BookController {
    * @return Template view (render)
    */
   public async destroy(req: Request, res: Response) {
-    try {
-      const book = await BookModel.findByIdAndDelete(req.params.id)
-      res.status(200).json(book)
-    } catch (error) {
-      res.status(500).json(error)
-    }
+
   }
 }
 
-const bookController = new BookController()
-export default bookController
+const commentController = new CommentController()
+export default commentController

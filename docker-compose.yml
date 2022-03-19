@@ -11,7 +11,7 @@ services:
     container_name: app-api
     build:
       context: ./
-      target: prod
+      target: dev
     ports:
       - '3000:3000'
     environment:
@@ -23,7 +23,7 @@ services:
       - '/usr/src/app/node_modules' # Necesario para el arranque de la app en Docker
       - '.:/usr/src/app'
 
-  mongo:
+  mongodb:
     container_name: mongo
     image: 'mongo:5.0.6'
     ports:

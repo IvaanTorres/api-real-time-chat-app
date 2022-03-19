@@ -3,15 +3,20 @@
   "version": "1.0.0",
   "description": "API Thunder Link APP (Real time chat app)",
   "main": "index.js",
+  "jest": {
+    "testPathIgnorePatterns": ["dist"]
+  },
   "scripts": {
     "clear": "rm -fr dist",
-    "dev": "ts-node-dev ./src/index.ts",
+    "dev": "ts-node-dev --respawn --watch src ./src/index.ts",
     "start": "node ./dist/index.js",
     "build": "tsc",
     "prepare": "husky install",
     "test:unit": "jest",
     "coverage": "npm run test:unit && node sonar-project.js",
-    "lint": "eslint \"**/*.{ts,js}\""
+    "lint": "eslint \"**/*.{ts,js}\"",
+    "docker:local": "docker-compose up --build --remove-orphans",
+    "docker:prod": "docker-compose -f docker-compose.prod.yml up --build"
   },
   "repository": {
     "type": "git",
@@ -44,6 +49,7 @@
     "express": "^4.17.2",
     "mongoose": "^6.2.1",
     "morgan": "^1.10.0",
+    "socket.io": "^4.4.1",
     "sonarqube-scanner": "^2.8.1"
   }
 }
