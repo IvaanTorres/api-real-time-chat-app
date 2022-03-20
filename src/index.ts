@@ -9,7 +9,11 @@ const server = http.createServer(app)
 const httpServer = server.listen(PORT)
 console.log('Server is running on port', PORT)
 
-const io = new WebSocketServer(httpServer)
+const io = new WebSocketServer(httpServer, {
+  cors: {
+    origin: '*',
+  },
+})
 sockets(io)
 
 /* -------------------------------- DATABASE -------------------------------- */
