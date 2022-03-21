@@ -17,7 +17,10 @@
     "coverage": "npm run test:unit && node sonar-project.js",
     "lint": "eslint \"**/*.{ts,js}\"",
     "docker:local": "docker-compose up --build --remove-orphans",
-    "docker:prod": "docker-compose -f docker-compose.prod.yml up --build"
+    "docker:local:not-ui": "docker-compose up --scale ui=0 --build",
+    "docker:local:api": "docker-compose up api --build",
+    "docker:prod": "docker-compose -f docker-compose.prod.yml up --build",
+    "docker:services": "docker-compose up mongodb sonarqube"
   },
   "repository": {
     "type": "git",
