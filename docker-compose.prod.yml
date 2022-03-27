@@ -16,7 +16,7 @@ services:
       - DB_PORT=${DB_PORT}
       - DB_DATABASE=${DB_DATABASE}
     ports:
-      - '${API_PORT}:3000'
+      - '${PORT}:3000'
 
   mongodb:
     container_name: mongo

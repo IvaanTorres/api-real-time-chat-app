@@ -13,7 +13,7 @@ services:
       context: ./
       target: dev
     ports:
-      - '${API_PORT}:3000'
+      - '${PORT}:3000'
     environment:
       - DB_CONNECTION=mongodb
       - DB_HOST=mongodb
