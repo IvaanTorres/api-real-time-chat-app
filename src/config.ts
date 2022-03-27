@@ -12,5 +12,5 @@ export const {
 
 // Express config
 export const {
-  PORT,
+  API_PORT,
 } = process.env

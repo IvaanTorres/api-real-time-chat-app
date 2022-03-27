@@ -11,12 +11,12 @@ services:
     container_name: app-api
     image: 'ivaantorres/api-real-time-chat-app:0.1'
     environment:
-      - DB_CONNECTION=${DB_CONNECTION}
-      - DB_HOST=${DB_HOST}
+      - DB_CONNECTION=mongodb
+      - DB_HOST=mongodb
       - DB_PORT=${DB_PORT}
       - DB_DATABASE=${DB_DATABASE}
     ports:
-      - '${PORT}:3000'
+      - '${API_PORT}:3000'
 
   mongodb:
     container_name: mongo

@@ -13,7 +13,7 @@ services:
       context: ./
       target: dev
     ports:
-      - '3000:3000'
+      - '${API_PORT}:3000'
     environment:
       - DB_CONNECTION=mongodb
       - DB_HOST=mongodb
@@ -27,7 +27,7 @@ services:
     container_name: mongo
     image: 'mongo:5.0.6'
     ports:
-      - '27017:27017'
+      - '${DB_PORT}:27017'
     volumes:
       - '/c/data/db:/data/db'
     logging:
