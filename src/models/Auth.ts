@@ -1,12 +1,13 @@
 import mongoose from 'mongoose'
 
-export interface User extends mongoose.Document {
-  user: String
-  password: String
-  role: String
+// Interface for the User model
+interface User extends mongoose.Document {
+  user: string
+  password: string
+  role: string
 }
-
-export const UserSchema = new mongoose.Schema({
+// User Schema
+const UserSchema = new mongoose.Schema({
   user: {
     type: String,
     required: true,
@@ -20,5 +21,6 @@ export const UserSchema = new mongoose.Schema({
     required: true,
   },
 })
-
-export const UserModel = mongoose.model<User>('user', UserSchema)
+// Create the User model
+const UserModel = mongoose.model<User>('user', UserSchema)
+export { User, UserSchema, UserModel }

@@ -1,14 +1,14 @@
 import mongoose from 'mongoose'
 
-//! INTERFACES
+// Interface for the Comment model
 interface Comment extends mongoose.Document {
-  body: String
-  user: String
+  body: string
+  user: string
   created_at: Date
   updated_at: Date
 }
 
-//! SCHEMA
+// Comment Schema
 const CommentSchema = new mongoose.Schema({
   body: {
     type: String,
@@ -26,5 +26,6 @@ const CommentSchema = new mongoose.Schema({
   timestamps: true,
 })
 
+// Create the Comment model
 const CommentModel = mongoose.model<Comment>('Comments', CommentSchema)
 export { Comment, CommentSchema, CommentModel }

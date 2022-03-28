@@ -4,6 +4,7 @@ import {
   DB_CONNECTION, DB_DATABASE, DB_HOST, DB_PORT,
 } from './config'
 
+// Connect to MongoDB
 mongoose
   .connect(
     `${DB_CONNECTION}://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
