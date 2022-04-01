@@ -13,8 +13,8 @@ console.log('Server is running on port', PORT)
 // Create WebSocket server from HTTP server
 const io = new WebSocketServer(httpServer, {
   cors: {
-    // Allow all origins
-    origin: '*',
+    // Allow just the DEV origins
+    origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
   },
 })
 // Connect sockets to WebSocket server
