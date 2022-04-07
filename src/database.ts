@@ -1,13 +1,7 @@
-/* eslint-disable no-console */
-import mongoose from 'mongoose'
+import { conn } from './utils/database/utils'
 import {
   DB_CONNECTION, DB_DATABASE, DB_HOST, DB_PORT,
-} from './config'
+} from './config/database/config'
 
 // Connect to MongoDB
-mongoose
-  .connect(
-    `${DB_CONNECTION}://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
-  )
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.log(`An error occured during the MongoDB connection\nERROR: ${err}`))
+conn(DB_CONNECTION!, DB_HOST!, DB_PORT!, DB_DATABASE!)

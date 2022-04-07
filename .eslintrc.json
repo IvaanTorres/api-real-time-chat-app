@@ -21,7 +21,7 @@
         "jest/no-identical-title": "error",
         "jest/prefer-to-have-length": "warn",
         "jest/valid-expect": "error",
-        "semi":"off",
+        "semi": ["error", "never"],
         "import/extensions": "off",
         "import/no-unresolved": "off",
         "class-methods-use-this": "off"

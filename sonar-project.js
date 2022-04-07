@@ -1,5 +1,7 @@
-require('dotenv').config()
-const sonarqubeScanner = require('sonarqube-scanner');
+import { config } from 'dotenv'
+import sonarqubeScanner from 'sonarqube-scanner'
+
+config()
 
 sonarqubeScanner({
   serverUrl: process.env.SONAR_API_URL,
@@ -12,5 +14,5 @@ sonarqubeScanner({
   },
 }, () => {
   // eslint-disable-next-line no-console
-  console.log('Error Occurred while scanning');
-});
+  console.log('Error Occurred while scanning')
+})

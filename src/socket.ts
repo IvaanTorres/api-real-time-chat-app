@@ -1,6 +1,15 @@
-/* eslint-disable no-unused-vars */
-export default (io) => {
+import { Server } from 'socket.io'
+
+/**
+ * Connect socket to WebSocket server.
+ * @param {Server} io - The socket.io server.
+ */
+export default (io: Server) => {
   io.on('connection', (socket) => {
-    console.log('Welcome')
+    console.log('New client connected')
+
+    socket.on('test', () => {
+      console.log('test')
+    })
   })
 }

@@ -1,23 +1,14 @@
-/* eslint-disable no-console */
-import { Server as WebSocketServer } from 'socket.io'
-import http from 'http'
-import app from './app'
-import { PORT } from './config'
-import socket from './socket'
+import server from './app'
+import { io } from './utils/socket.io/utils'
+import socketSession from './socket'
+import { PORT } from './config/database/config'
 
-// Create HTTP server from express application
-const server = http.createServer(app)
-// Server listening on port $PORT
+// Create the HTTP server listener
 const httpServer = server.listen(PORT)
-console.log('Server is running on port', PORT)
-// Create WebSocket server from HTTP server
-const io = new WebSocketServer(httpServer, {
-  cors: {
-    // Allow just the DEV origins
-    origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
-  },
-})
+console.log(`Server running on port ${PORT}`)
+
 // Connect sockets to WebSocket server
-socket(io)
+socketSession(io(httpServer))
+
 // Database connection
 import('./database')

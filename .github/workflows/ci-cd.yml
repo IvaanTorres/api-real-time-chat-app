@@ -27,7 +27,7 @@ jobs:
 
       - run: npm install
       - run: npm run build
-      # - run: npm test --if-present
+      - run: npm run test:unit
 
   docker:
     needs: build
