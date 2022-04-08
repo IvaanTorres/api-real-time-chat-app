@@ -1,7 +1,5 @@
-import { config } from 'dotenv'
-import sonarqubeScanner from 'sonarqube-scanner'
-
-config()
+require('dotenv').config()
+const sonarqubeScanner = require('sonarqube-scanner')
 
 sonarqubeScanner({
   serverUrl: process.env.SONAR_API_URL,

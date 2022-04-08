@@ -1,9 +1,21 @@
 {
-  "type": "module",
   "name": "api-thunder-link",
   "version": "1.0.0",
   "description": "API Thunder Link APP (Real time chat app)",
   "main": "index.js",
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "ts-jest",
+    "transform": {
+      "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!variables/.*)"
+    ],
+    "testPathIgnorePatterns": [
+      "dist"
+    ]
+  },
   "scripts": {
     "clear": "rm -fr dist",
     "dev": "ts-node-dev --respawn --watch src ./src/index.ts",
