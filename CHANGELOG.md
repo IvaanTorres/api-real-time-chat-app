@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is partially based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## **[v0.1.0-alpha] - 2022-04-08**
+## **[v0.1.0] - 2022-04-09**
 
 - ### **Feat**
   - [2022-03-12] Setup project and add local DEV and PROD docker ENV ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/e1a2b2a18fe1ac54930f3b48c11a3f92b82b6829))
@@ -43,4 +43,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ### **Docs**
   - [2022-03-14] Change package.json information ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/b46394b6fc40b2c22d5cff9924f958ae822014c9))
   - [2022-03-29] Add comments and fix security hotspots ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/f1e183f64368619ddd38a3d06671707957836d31))
+  - [2022-04-09] Create the CHANGELOG and modify the README ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/adbfde179fe367c487fc2522be816dc6be00332b))
 
