@@ -8,7 +8,7 @@ import { Server } from 'socket.io'
  */
 const io = (http) => new Server(http, {
   cors: {
-    origin: ['http://localhost', 'https://thunder-chat.herokuapp.com'],
+    origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
   },
 })
 
