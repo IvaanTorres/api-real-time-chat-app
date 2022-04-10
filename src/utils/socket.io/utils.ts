@@ -6,7 +6,11 @@ import { Server } from 'socket.io'
  * @param {Server} http - The HTTP server.
  * @returns The WebSocket server.
  */
-const io = (http) => new Server(http)
+const io = (http) => new Server(http, {
+  cors: {
+    origin: ['http://localhost', 'https://thunder-chat.herokuapp.com'],
+  },
+})
 
 export {
   io,
