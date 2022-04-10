@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is partially based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **[v0.1.1] - 2022-04-10**
+
+- ### **Fix**
+  - [2022-04-10] Set CORS inside the utils function ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/e6ef769336cc85aeb592d60413243c1d14cd5638))
 ## **[v0.1.0] - 2022-04-09**
 
 - ### **Feat**
