@@ -10,26 +10,14 @@ services:
   api:
     container_name: app-api
     image: 'ivaantorres/api-real-time-chat-app:0.1'
-    depends_on:
-      - mongodb
     environment:
-      - DB_CONNECTION=mongodb
-      - DB_HOST=mongodb
-      - DB_PORT=${DB_PORT}
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}
       - DB_DATABASE=${DB_DATABASE}
+      - DB_PARAMS=${DB_PARAMS}
       - PORT=${PORT}
     ports:
       - '${PORT}:3000'
-
-  mongodb:
-    container_name: mongo
-    image: 'mongo:5.0.6'
-    ports:
-      - '${DB_PORT}:27017'
-    volumes:
-      - '/c/data/db:/data/db'
-    logging:
-      driver: none
 
   sonarqube:
     container_name: sonarqube
@@ -44,3 +32,7 @@ services:
       - '/c/Users/Iván/Desktop/sonarqube/extensions:/opt/sonarqube/extensions'
     logging:
       driver: none
+
+networks: 
+  default:
+    name: thunder-link-network

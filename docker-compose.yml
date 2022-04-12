@@ -11,16 +11,16 @@ services:
     container_name: app-api
     build:
       context: ./
-      target: dev
+      target: prod
     ports:
       - '${PORT}:3000'
     depends_on:
       - mongodb
     environment:
       - DB_CONNECTION=mongodb
-      - DB_HOST=mongodb
-      - DB_PORT=${DB_PORT}
+      - DB_HOST=mongodb:${DB_PORT}
       - DB_DATABASE=${DB_DATABASE}
+      - DB_PARAMS=${DB_PARAMS}
     volumes:
       - '/usr/src/app/node_modules' # Necesario para el arranque de la app en Docker
       - '.:/usr/src/app'
