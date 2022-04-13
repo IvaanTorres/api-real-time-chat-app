@@ -3,21 +3,33 @@ version: '3'
 services:
   ui:
     container_name: app-ui
-    image: 'ivaantorres/real-time-chat-app:0.1'
+    image: 'ivaantorres/real-time-chat-app:${UI_VERSION}'
     ports:
       - '80:80'
 
   api:
     container_name: app-api
-    image: 'ivaantorres/api-real-time-chat-app:0.1.1'
+    image: 'ivaantorres/api-real-time-chat-app:${API_VERSION}'
+    depends_on:
+      - mongodb
     environment:
-      - DB_CONNECTION=${DB_CONNECTION}
-      - DB_HOST=${DB_HOST}
+      - DB_CONNECTION=mongodb
+      - DB_HOST=mongodb:${DB_PORT}
       - DB_DATABASE=${DB_DATABASE}
       - DB_PARAMS=${DB_PARAMS}
       - PORT=${PORT}
     ports:
       - '${PORT}:3000'
+
+    mongodb:
+      container_name: mongo
+      image: 'mongo:5.0.6'
+      ports:
+        - '${DB_PORT}:27017'
+      volumes:
+        - '/c/data/db:/data/db'
+      logging:
+        driver: none
 
   sonarqube:
     container_name: sonarqube

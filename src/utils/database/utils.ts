@@ -12,7 +12,7 @@ const conn = async (connection: string, host: string, db: string, params: string
   const URI = `${connection}://${host}/${db}${params}`
   try {
     await mongoose.connect(URI)
-    console.log('Connected to MongoDB: ', URI)
+    console.log('Connected to MongoDB')
   } catch (err) {
     console.log(`An error occured during the MongoDB connection\nERROR: ${err}`)
   }
