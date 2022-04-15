@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { Server, Socket } from 'socket.io'
 import { Message, MessageModel } from './models/Message'
+import { newTag } from './utils/socket.io/utils'
 
 /**
  * Handles the socket.io connection.
@@ -8,17 +9,16 @@ import { Message, MessageModel } from './models/Message'
  * @param {Socket} socket - The server socket.
  */
 const onConnection = (socket: Socket) => {
-  socket.emit('server:welcome', `Welcome to the chat! (${socket.id})`)
-  socket.broadcast.emit('server:user-connection', `A new user has joined the chat (${socket.id})`)
-  console.log('New client connected: ', socket.id)
+  socket.emit('server:welcome', newTag(socket, 'Welcome to the chat'))
+  socket.broadcast.emit('server:user-connection', newTag(socket, 'A new user has joined the chat'))
 }
 /**
  * Load the stored messages.
  * @param {Server} io - The socket.io server.
  */
-const loadMessages = async (io: Server) => {
+const loadMessages = async (socket: Socket) => {
   const messages = await MessageModel.find().sort({ createdAt: 1 })
-  io.emit('server:load-messages', messages)
+  socket.emit('server:load-messages', messages)
 }
 /**
  * Handles the socket.io disconnection.
@@ -26,8 +26,7 @@ const loadMessages = async (io: Server) => {
  * @param {Socket} socket - The server socket.
  */
 const onDisconnection = (socket: Socket) => {
-  socket.broadcast.emit('server:user-disconnection', `A user has left the chat (${socket.id})`)
-  console.log('Client disconnected: ', socket.id)
+  socket.broadcast.emit('server:user-disconnection', newTag(socket, 'A user has left the chat'))
 }
 /**
  * Handle the message event trigered by the client.
@@ -39,7 +38,6 @@ const onClientMessage = async (io: Server, data: Message) => {
   if (data.user && data.body) {
     const newMessage = new MessageModel(data)
     const savedMessage = await newMessage.save()
-    console.log(data)
     // Send the message to all connected clients.
     io.emit('server:saved-message', savedMessage)
   }
@@ -54,7 +52,7 @@ export default (io: Server) => {
     // Handle connection
     onConnection(socket)
     // Load messages on connection
-    loadMessages(io)
+    loadMessages(socket)
     // Listen for new message
     socket.on('client:message', (obj: Message) => onClientMessage(io, obj))
     // Listen for user disconnection
