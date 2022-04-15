@@ -26,7 +26,7 @@ describe('Socket.IO', () => {
     ioServer = io(httpServer)
     // Connect socket to WebSocket server
     socketSession(ioServer)
-    ioServer.on('connection', (socket) => {
+    ioServer.on('connection', (socket: Socket) => {
       socketServer = socket
     })
     ioClient.on('connect', done)
@@ -38,7 +38,7 @@ describe('Socket.IO', () => {
   })
 
   test('should work', (done) => {
-    ioClient.on('hello', (arg) => {
+    ioClient.on('hello', (arg: string) => {
       expect(arg).toBe('world')
       done()
     })
@@ -49,7 +49,7 @@ describe('Socket.IO', () => {
     socketServer.on('hi', (cb) => {
       cb('hola')
     })
-    ioClient.emit('hi', (arg) => {
+    ioClient.emit('hi', (arg: string) => {
       expect(arg).toBe('hola')
       done()
     })
