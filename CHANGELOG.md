@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is partially based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **[v1.0.0] - 2022-04-16**
+- ### **Feat**
+  - [2022-04-15] Create the socket events to store the given messages ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/d358d261c0bd967a5b093a4d8ce6c0d0412f0e42))
+  - [2022-04-15] Create the Tag model and send the object trough the event ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/c524eed186d5016a8fa4b42ed0d1da0957c61002))
+
+- ### **Fix**
+  - [2022-04-13] Change the restart of the docker images, the work badly ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/e3934362f680724a1d95a8ea713fa3a43fd3f1e6))
+  - [2022-04-16] Heroku crashes ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/1599cfb12646b01a8ce1a6a8c115271f6c3aaddb))
+
+- ### **Chore**
+  - [2022-04-12] Set mongodb atlas in PROD mode and docker PROD mode ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/fc103252fc27f350da8917c2f0a8b1989d8e1187))
+
+- ### **CI**
+  - [2022-04-12] Change API APP Docker image version to 0.1.1 ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/2bcf7be56368c2b771037ec53f6d20c92cc1f433))
+
 ## **[v0.1.1] - 2022-04-10**
 
 - ### **Fix**
