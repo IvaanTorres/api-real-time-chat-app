@@ -11,7 +11,7 @@ beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation(jest.fn())
 })
 
-describe('Socket.IO', () => {
+describe.skip('Socket.IO', () => {
   let httpServer: Server
   let ioClient: SocketIOClient
   let ioServer: SocketIOServer

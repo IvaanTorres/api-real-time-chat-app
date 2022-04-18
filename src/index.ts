@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import server from './app'
 import { io } from './utils/socket.io/utils'
 import socketSession from './socket'

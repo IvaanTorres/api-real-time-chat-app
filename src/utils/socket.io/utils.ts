@@ -1,27 +1,45 @@
-/* eslint-disable import/prefer-default-export */
 import { Server, Socket } from 'socket.io'
-import Tag from '../../models/Tag'
+import User from '../../models/User'
 
 /**
  * Create WebSocket server from HTTP server.
  * @param {Server} http - The HTTP server.
- * @returns The WebSocket server.
+ * @returns {Server} The WebSocket server.
  */
-const io = (http) => new Server(http, {
-  cors: {
-    origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
-  },
-})
+const io = (http) => {
+  const srv = new Server(http, {
+    cors: {
+      origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
+    },
+  })
+
+  // Middleware to handle the auth credentials
+  srv.use((socket, next) => {
+    const { username } = socket.handshake.auth
+    if (!username) {
+      return next(new Error('Invalid username'))
+    }
+    // eslint-disable-next-line no-param-reassign
+    (socket as any).username = username as string
+    return next()
+  })
+
+  return srv
+}
 
 /**
- * Create a new tag object.
+ * Create a new user instance.
  * @param {Socket} socket  The server socket. It is the user identifier.
- * @param {string} msg - The message in string format.
- * @returns {Tag} The tag object.
+ * @returns {User} The user instance.
  */
-const newTag = (socket: Socket, msg: string): Tag => ({ _id: socket.id, message: msg })
+const user = (socket: Socket): User => (
+  {
+    id: socket.id,
+    username: (socket as any).username,
+  }
+)
 
 export {
   io,
-  newTag,
+  user,
 }

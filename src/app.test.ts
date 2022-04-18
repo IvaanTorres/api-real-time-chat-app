@@ -8,7 +8,7 @@ beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation(jest.fn())
 })
 
-describe('HTTP Server', () => {
+describe.skip('HTTP Server', () => {
   let listener: Server
 
   beforeAll(() => {
