@@ -1,28 +1,22 @@
-import { Server, Socket } from 'socket.io'
+import { Server as SocketServer, Socket } from 'socket.io'
+import { Server } from 'http'
+import auth from '../../middlewares/auth'
 import User from '../../models/User'
 
 /**
  * Create WebSocket server from HTTP server.
  * @param {Server} http - The HTTP server.
- * @returns {Server} The WebSocket server.
+ * @returns {SocketServer} The WebSocket server.
  */
-const io = (http) => {
-  const srv = new Server(http, {
+const io = (http: Server): SocketServer => {
+  const srv = new SocketServer(http, {
     cors: {
       origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
     },
   })
 
   // Middleware to handle the auth credentials
-  srv.use((socket, next) => {
-    const { username } = socket.handshake.auth
-    if (!username) {
-      return next(new Error('Invalid username'))
-    }
-    // eslint-disable-next-line no-param-reassign
-    (socket as any).username = username as string
-    return next()
-  })
+  auth(srv)
 
   return srv
 }

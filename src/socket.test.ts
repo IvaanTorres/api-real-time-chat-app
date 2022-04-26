@@ -2,16 +2,24 @@ import { createServer, Server } from 'http'
 import Client, { Socket as SocketIOClient } from 'socket.io-client'
 import { Server as SocketIOServer, Socket } from 'socket.io'
 import { AddressInfo } from 'net'
+import mongoose from 'mongoose'
 import { io } from './utils/socket.io/utils'
-import socketSession from './socket'
+import socketSession, { loadMessages, onClientMessage } from './socket'
+import clientEvents from './utils/socket.io/events.client'
+import { Message, MessageModel } from './models/Message'
+import serverEvents from './utils/socket.io/events.server'
+import message from './__mocks__/message'
+import client from './__mocks__/user'
 
 const serverPort = 4000
+
+Date.now = jest.fn(() => new Date(Date.UTC(2017, 1, 14)).valueOf())
 
 beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation(jest.fn())
 })
 
-describe.skip('Socket.IO', () => {
+describe('Socket.IO', () => {
   let httpServer: Server
   let ioClient: SocketIOClient
   let ioServer: SocketIOServer
@@ -23,6 +31,9 @@ describe.skip('Socket.IO', () => {
     httpServer = server.listen(serverPort)
     const { port } = httpServer.address() as AddressInfo
     ioClient = Client(`http://localhost:${port}`)
+    // Set the client credentials
+    ioClient.auth = { username: client.username }
+
     ioServer = io(httpServer)
     // Connect socket to WebSocket server
     socketSession(ioServer)
@@ -37,21 +48,60 @@ describe.skip('Socket.IO', () => {
     ioClient.disconnect()
   })
 
-  test('should work', (done) => {
-    ioClient.on('hello', (arg: string) => {
-      expect(arg).toBe('world')
-      done()
-    })
-    socketServer.emit('hello', 'world')
-  })
+  describe('Events', () => {
+    let db: mongoose.Connection
+    const collection = 'test_thunder-link'
 
-  test('should work (with ack)', (done) => {
-    socketServer.on('hi', (cb) => {
-      cb('hola')
+    beforeAll(async () => {
+      await mongoose.connect(`mongodb://localhost:27017/${collection}`)
+      db = mongoose.connection
+      await db.createCollection(collection)
     })
-    ioClient.emit('hi', (arg: string) => {
-      expect(arg).toBe('hola')
-      done()
+
+    afterAll(async () => {
+      await db.dropCollection(collection)
+      await db.dropDatabase()
+      await db.close()
+    })
+
+    test('should save the message sent by the client', () => {
+      const {
+        user, body, createdAt, updatedAt,
+      } = message
+
+      // Send the message to the server
+      ioClient.emit(clientEvents.MESSAGE, message)
+      socketServer.on(clientEvents.MESSAGE, async (msg) => {
+        await onClientMessage(ioServer, msg)
+        expect(msg).toEqual({
+          user,
+          body,
+          createdAt: createdAt.toISOString(),
+          updatedAt: updatedAt.toISOString(),
+        })
+      })
+    })
+
+    test('should send the stored messages to the client', async () => {
+      // TODO: Check why I need to call this function twice to get the messages
+      let messages: Message[] = await MessageModel.find().sort({ createdAt: 1 })
+      // eslint-disable-next-line prefer-const
+      messages = await MessageModel.find().sort({ createdAt: 1 })
+
+      await loadMessages(socketServer)
+      ioClient.on(serverEvents.LOAD_MESSAGES, (msgs: Message[]) => {
+        const messagesWithStringDate = messages.map(({
+          __v, id, user, body, createdAt, updatedAt,
+        }) => ({
+          __v,
+          _id: id,
+          user,
+          body,
+          createdAt: createdAt.toISOString(),
+          updatedAt: updatedAt.toISOString(),
+        }))
+        expect(msgs).toEqual(messagesWithStringDate)
+      })
     })
   })
 })

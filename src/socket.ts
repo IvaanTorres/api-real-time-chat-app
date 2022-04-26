@@ -11,7 +11,7 @@ import { user } from './utils/socket.io/utils'
  * @param {Server} io - The socket.io server.
  * @param {Socket} socket - The server socket.
  */
-const onConnection = (io: Server, socket: Socket) => {
+export const onConnection = (io: Server, socket: Socket) => {
   const users: User[] = []
   // Load the connected socket clients and store them as User instances.
   io.of('/').sockets.forEach((connectedClient: Socket) => {
@@ -33,7 +33,7 @@ const onConnection = (io: Server, socket: Socket) => {
  * Load the stored messages.
  * @param {Socket} socket - The server socket.
  */
-const loadMessages = async (socket: Socket) => {
+export const loadMessages = async (socket: Socket) => {
   const messages = await MessageModel.find().sort({ createdAt: 1 })
   // Emit the messages to the client.
   socket.emit(server.LOAD_MESSAGES, messages)
@@ -44,7 +44,7 @@ const loadMessages = async (socket: Socket) => {
  * Listen for user disconnection
  * @param {Socket} socket - The server socket.
  */
-const onDisconnection = (socket: Socket) => {
+export const onDisconnection = (socket: Socket) => {
   // Emit the disconnected user message to all the clients except this socket.
   socket.broadcast.emit(server.USER_DISCONNECTION, user(socket))
 }
@@ -55,10 +55,10 @@ const onDisconnection = (socket: Socket) => {
  * @param {Server} io - The socket.io server.
  * @param {Message} data - The message object.
  */
-const onClientMessage = async (io: Server, data: Message) => {
+export const onClientMessage = async (io: Server, data: Message) => {
   if (data.user && data.body) {
     const newMessage = new MessageModel(data)
-    const savedMessage = await newMessage.save()
+    const savedMessage: Message = await newMessage.save()
     // Emit the message event to all connected clients.
     io.emit(server.SAVED_MESSAGE, savedMessage)
   }

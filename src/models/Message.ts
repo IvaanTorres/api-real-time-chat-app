@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 
 // Interface for the Message model
 interface Message extends mongoose.Document {
+  id?: string
   body: string
   user: string
   createdAt: Date
