@@ -1,6 +1,6 @@
 {
   "name": "api-thunder-link",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "API Thunder Link APP (Real time chat app)",
   "main": "index.js",
   "jest": {

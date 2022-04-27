@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is partially based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **[v1.1.0] - 2022-04-27**
+- ### **Feat**
+  - [2022-04-18] Return the connected users and return the user instance instead of the tag itself ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/d7fa544cf8d57a60c0a6423f079f53248e357d66))
+
+- ### **Test**
+  - [2022-04-27] Add integration tests ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/e22807d272725d91c2542739d343506df0ec9400))
+
+- ### **CI**
+  - [2022-04-27] Update the Docker image tag ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/885c0061ae4a801f152347763955d66383736819))
+
 ## **[v1.0.0] - 2022-04-16**
 - ### **Feat**
   - [2022-04-15] Create the socket events to store the given messages ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/d358d261c0bd967a5b093a4d8ce6c0d0412f0e42))
