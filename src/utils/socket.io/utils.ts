@@ -11,7 +11,7 @@ import User from '../../models/User'
 const io = (http: Server): SocketServer => {
   const srv = new SocketServer(http, {
     cors: {
-      origin: ['http://localhost', 'https://thunder-link.herokuapp.com'],
+      origin: '*',
     },
   })
 
