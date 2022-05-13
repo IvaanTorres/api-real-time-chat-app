@@ -27,10 +27,35 @@ jobs:
 
       - run: npm install
       - run: npm run build
-      # - run: npm run test:int
+  
+  integration-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: npm install
+      - run: npm run build
+      - run: npm run test:int
+        env:
+          DB_CONNECTION: mongodb+srv
+          DB_DATABASE: thunder-link
+          DB_PARAMS: retryWrites=true&w=majority
+          DB_HOST: ivan:1234567890Qw@cluster0.uownn.mongodb.net
+      # TODO: Add integration tests
 
   docker:
-    needs: build
+    needs: integration-tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -58,15 +83,15 @@ jobs:
         with:
           context: .
           push: true
-          tags: ivaantorres/api-real-time-chat-app:1.1.0 # Name of the new tag
+          tags: ivaantorres/api-real-time-chat-app:1.5.0 # Name of the new tag
 
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
-          heroku_email: 'ivantorresgarcia.02@gmail.com'
+  #deploy:
+  #  needs: docker
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v2
+  #    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+  #      with:
+  #        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+  #        heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+  #        heroku_email: 'ivantorresgarcia.02@gmail.com'

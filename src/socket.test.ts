@@ -10,6 +10,9 @@ import { Message, MessageModel } from './models/Message'
 import serverEvents from './utils/socket.io/events.server'
 import message from './__mocks__/message'
 import client from './__mocks__/user'
+import {
+  DB_CONNECTION, DB_HOST, DB_PARAMS,
+} from './config/database/config'
 
 const serverPort = 4000
 
@@ -50,21 +53,28 @@ describe('Socket.IO', () => {
 
   describe('Events', () => {
     let db: mongoose.Connection
-    const collection = 'test_thunder-link'
+    const DB_DATABASE = 'test_thunder-link'
 
     beforeAll(async () => {
-      await mongoose.connect(`mongodb://localhost:27017/${collection}`)
+      await mongoose.connect(`${DB_CONNECTION}://${DB_HOST}/${DB_DATABASE}?${DB_PARAMS}`)
       db = mongoose.connection
-      await db.createCollection(collection)
+      // await db.createCollection(DB_DATABASE)
+    })
+
+    beforeEach(async () => {
+      await db.createCollection(DB_DATABASE)
     })
 
     afterAll(async () => {
-      await db.dropCollection(collection)
-      await db.dropDatabase()
+      // await db.dropCollection(DB_DATABASE)
       await db.close()
     })
 
-    test('should save the message sent by the client', () => {
+    afterEach(async () => {
+      await db.dropDatabase()
+    })
+
+    test('should save the message sent by the client', async () => {
       const {
         user, body, createdAt, updatedAt,
       } = message
@@ -73,7 +83,7 @@ describe('Socket.IO', () => {
       ioClient.emit(clientEvents.MESSAGE, message)
       socketServer.on(clientEvents.MESSAGE, async (msg) => {
         await onClientMessage(ioServer, msg)
-        expect(msg).toEqual({
+        expect(msg).toStrictEqual({
           user,
           body,
           createdAt: createdAt.toISOString(),
@@ -83,10 +93,7 @@ describe('Socket.IO', () => {
     })
 
     test('should send the stored messages to the client', async () => {
-      // TODO: Check why I need to call this function twice to get the messages
-      let messages: Message[] = await MessageModel.find().sort({ createdAt: 1 })
-      // eslint-disable-next-line prefer-const
-      messages = await MessageModel.find().sort({ createdAt: 1 })
+      const messages: Message[] = await MessageModel.find().sort({ createdAt: 1 })
 
       await loadMessages(socketServer)
       ioClient.on(serverEvents.LOAD_MESSAGES, (msgs: Message[]) => {
@@ -100,7 +107,7 @@ describe('Socket.IO', () => {
           createdAt: createdAt.toISOString(),
           updatedAt: updatedAt.toISOString(),
         }))
-        expect(msgs).toEqual(messagesWithStringDate)
+        expect(msgs).toStrictEqual(messagesWithStringDate)
       })
     })
   })
