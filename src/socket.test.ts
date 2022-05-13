@@ -11,7 +11,7 @@ import serverEvents from './utils/socket.io/events.server'
 import message from './__mocks__/message'
 import client from './__mocks__/user'
 import {
-  DB_CONNECTION, DB_HOST, DB_PARAMS,
+  DB_CONNECTION, DB_HOST,
 } from './config/database/config'
 
 const serverPort = 4000
@@ -56,7 +56,7 @@ describe('Socket.IO', () => {
     const DB_DATABASE = 'test_thunder-link'
 
     beforeAll(async () => {
-      await mongoose.connect(`${DB_CONNECTION}://${DB_HOST}/${DB_DATABASE}?${DB_PARAMS}`)
+      await mongoose.connect(`${DB_CONNECTION}://${DB_HOST}/${DB_DATABASE}?retryWrites=true&w=majority`)
       db = mongoose.connection
       // await db.createCollection(DB_DATABASE)
     })
