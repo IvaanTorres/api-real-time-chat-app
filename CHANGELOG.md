@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is partially based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **[v1.5.0] - 2022-05-13**
+- ### **Fix**
+  - [2022-05-13] Set up CORS ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/2e8e7114593918cee41cce95d32085da1122eca6))
+
+- ### **CI**
+  - [2022-05-13] Update pipeline and prepare tests for it ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/c9d567291279474ea1e8e38eb6ce511e1df01c98))
+  - [2022-05-13] update pipeline and prepare tests for it. add github secrets for db credentials ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/81307b329e75b824c2986967637e9cc009cd6f6f))
+  - [2022-05-13] add automatic deployment to Heroku in the prepush git hook for the moment ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/1b2ac2cdc984ea928584a00cdcbb5a8d23910736))
+  
+- ### **Docs**
+  - [2022-05-05] Add MIT license ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/64a0d59ed80e14862cce38f5db15e5de76c06b1a))
+
 ## **[v1.1.0] - 2022-04-27**
 - ### **Feat**
   - [2022-04-18] Return the connected users and return the user instance instead of the tag itself ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/d7fa544cf8d57a60c0a6423f079f53248e357d66))
