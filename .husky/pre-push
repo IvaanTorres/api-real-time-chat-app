@@ -12,5 +12,6 @@ else
   printf "${BLUE}Running Integration Tests... (Jest)\n${NC}"
   npm run test:int
 fi
-# Deploy to Heroku
+
+printf "${BLUE}Deploying to Heroku...\n${NC}"
 git push heroku $current_branch:master --no-verify
