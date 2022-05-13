@@ -51,8 +51,7 @@ jobs:
           DB_CONNECTION: mongodb+srv
           DB_DATABASE: thunder-link
           DB_PARAMS: retryWrites=true&w=majority
-          DB_HOST: ivan:1234567890Qw@cluster0.uownn.mongodb.net
-      # TODO: Add integration tests
+          DB_HOST: ${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@cluster0.uownn.mongodb.net
 
   docker:
     needs: integration-tests
