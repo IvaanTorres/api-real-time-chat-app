@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -93,8 +93,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version:
-          - '8.1' # The Railway Docker container needs PHP 8.1 minimum
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
