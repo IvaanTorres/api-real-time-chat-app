@@ -4,5 +4,4 @@ import {
 } from './config/database/config'
 
 // Connect to MongoDB
-console.log('1', DB_CONNECTION, DB_HOST, DB_DATABASE, 'retryWrites=true&w=majority')
 conn(DB_CONNECTION!, DB_HOST!, DB_DATABASE!, 'retryWrites=true&w=majority')

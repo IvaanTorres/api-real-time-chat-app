@@ -10,7 +10,6 @@ import mongoose from 'mongoose'
  */
 const conn = async (connection: string, host: string, db: string, params: string) => {
   const URI = params ? `${connection}://${host}/${db}?${params}` : `${connection}://${host}/${db}`
-  console.log(URI)
   try {
     await mongoose.connect(URI)
     console.log('Connected to MongoDB')

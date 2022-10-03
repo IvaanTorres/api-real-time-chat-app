@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [master, dev]
 
+env:
+  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_PROD }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +30,7 @@ jobs:
 
       - run: npm install
       - run: npm run build
-  
+
   integration-tests:
     needs: build
     runs-on: ubuntu-latest
@@ -84,13 +87,20 @@ jobs:
           push: true
           tags: ivaantorres/api-real-time-chat-app:1.5.0 # Name of the new tag
 
-  #deploy:
-  #  needs: docker
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - uses: actions/checkout@v2
-  #    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-  #      with:
-  #        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-  #        heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
-  #        heroku_email: 'ivantorresgarcia.02@gmail.com'
+  deploy:
+    needs: 'docker'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '8.1' # The Railway Docker container needs PHP 8.1 minimum
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install the Railway CLI
+        run: npm i -g @railway/cli
+
+      - name: Deployment to Railway
+        run: railway up

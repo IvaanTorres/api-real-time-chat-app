@@ -21,15 +21,15 @@ services:
     ports:
       - '${PORT}:3000'
 
-    mongodb:
-      container_name: mongo
-      image: 'mongo:5.0.6'
-      ports:
-        - '${DB_PORT}:27017'
-      volumes:
-        - '/c/data/db:/data/db'
-      logging:
-        driver: none
+  mongodb:
+    container_name: mongo
+    image: 'mongo:5.0.6'
+    ports:
+      - '${DB_PORT}:27017'
+    volumes:
+      - '/c/data/db:/data/db'
+    logging:
+      driver: none
 
   sonarqube:
     container_name: sonarqube
