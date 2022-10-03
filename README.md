@@ -1,8 +1,8 @@
-# Thunder Link (v1.5.0) -  A Real-time Chat App
+# Thunder Link (v1.6.0) - A Real-time Chat App
 
 This is the Thunder Link Sockets API APP to provide data to the Thunder Link UI APP
 
-Link to the project in production: [http://api-thunder-link.herokuapp.com/](http://api-thunder-link.herokuapp.com/)
+Link to the project in production: [https://api-real-time-chat-app.up.railway.app/](https://api-real-time-chat-app.up.railway.app/)
 
 ## Features
 
@@ -13,7 +13,7 @@ Link to the project in production: [http://api-thunder-link.herokuapp.com/](http
 - Jest and SonarQube
 - Docker environments
 - CI/CD with Docker and GitHub Actions
-- Deploy Continuous to Heroku
+- Deploy Continuous to Railway
 - ENV config
 - Use of ESlint and Husky (Git hooks)
 

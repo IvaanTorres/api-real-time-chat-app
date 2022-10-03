@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is partially based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **[v1.6.0] - 2022-10-04**
+- ### **CI**
+  - [2022-10-04] Deploy to Railway ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/b0210b374ed1b382335cc318a9524a1fcde59ccc))
+  - [2022-10-04] Deploy to Railway ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/c9b933c384c405159d60d3a672290b8cbde65a50))
 ## **[v1.5.0] - 2022-05-13**
 - ### **Fix**
   - [2022-05-13] Set up CORS ([View commit](https://github.com/IvaanTorres/api-real-time-chat-app/commit/2e8e7114593918cee41cce95d32085da1122eca6))
